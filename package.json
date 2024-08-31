@@ -4,28 +4,36 @@
 	"description": "InfoSec project for freeCodeCamp",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"test": "nodemon server.js"
 	},
 	"dependencies": {
-		"body-parser": "^1.15.2",
+		"body-parser": "^1.19.0",
 		"chai": "^4.2.0",
-		"chai-http": "^3.0.0",
-		"cors": "^2.8.1",
-		"dotenv": "^8.6.0",
+		"chai-http": "^4.3.0",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
-		"helmet": "^3.1.0",
-		"mocha": "^3.2.0",
-		"mongodb": "^6.8.0",
+		"helmet": "^3.23.3",
+		"mocha": "^7.2.0",
+		"mongodb": "^3.7.4",
 		"mongoose": "^8.6.0",
-		"nodemon": "^3.1.4"
+		"node": "^22.7.0"
+	},
+	"engines": {
+		"node": "12.x"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/freeCodeCamp/boilerplate-project-messageboard"
+		"url": "https://github.com/lukwagoasuman/boilerplate-project-messageboard.git"
 	},
 	"keywords": [
 		"node",
+		"test",
 		"express"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"devDependencies": {
+		"nodemon": "^2.0.22"
+	}
 }
