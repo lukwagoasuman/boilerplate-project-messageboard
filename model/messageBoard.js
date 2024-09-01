@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 // Model: MessageBoard
 // Schema: threadSchema, replySchema
@@ -20,13 +20,12 @@ const replySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-})
-
+});
 
 const threadSchema = new mongoose.Schema({
   board: {
     type: String,
-    required: true
+    required: true,
   },
   text: {
     type: String,
@@ -51,41 +50,39 @@ const threadSchema = new mongoose.Schema({
     required: true,
   },
   replies: [replySchema],
-})
+});
 
-const Thread = mongoose.model("Thread", threadSchema)
-const Reply = mongoose.model("Reply", replySchema)
+const Thread = mongoose.model("Thread", threadSchema);
+const Reply = mongoose.model("Reply", replySchema);
 
-
-const getThreadId = async (text, delete_password) => {
-  let thread = await Thread.findOne({ text: text ? text : "test", delete_password: text ? text : "test" })
+const getThreadId = async (text = "test", delete_password = "test") => {
+  let thread = await Thread.findOne({ text, delete_password });
   if (!thread) {
-    let thread = await Thread.create({
+    thread = await Thread.create({
       board: "test",
-      text: "test",
-      delete_password: "test",
-      replies: []
-    })
+      text,
+      delete_password,
+      replies: [],
+    });
   }
-
-  return thread
-}
+  return thread;
+};
 
 const getReplyId = async (thread_id) => {
-  let thread = await Thread.findById(thread_id)
-  let reply = thread.replies.length > 0 ? thread.replies[0] : ""
+  let thread = await Thread.findById(thread_id);
+  let reply = thread.replies.length > 0 ? thread.replies[0] : null;
   if (!reply) {
-    let reply = new Reply({
+    reply = new Reply({
       text: "test",
       created_on: new Date(),
       reported: false,
       delete_password: "test",
-    })
-    thread.replies.push(reply)
-    thread = await thread.save()
-    reply = thread.replies[0]
+    });
+    thread.replies.push(reply);
+    thread = await thread.save();
+    reply = thread.replies[thread.replies.length - 1];
   }
-  return reply
-}
+  return reply;
+};
 
-module.exports = { Thread, Reply, getThreadId, getReplyId }
+module.exports = { Thread, Reply, getThreadId, getReplyId };
