@@ -10,7 +10,12 @@ const threadPostData = { board: "test", text: "test", delete_password: "test" };
 const replyData = { text: "test", delete_password: "test", board: "test" };
 
 suite('Functional Tests', function () {
-  this.timeout(5000);
+  suite("Functional Tests", function () {
+  beforeEach(async function () {
+    await Thread.deleteMany({});
+    await Reply.deleteMany({});
+  });
+ 
 
   test("#1 POST: Creating a new thread", function (done) {
     chai.request(server)
