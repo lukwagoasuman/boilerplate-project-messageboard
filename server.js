@@ -18,8 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-// ***************************************************** //
 // helmet 
 const helmet = require("helmet")
 
@@ -37,8 +35,6 @@ app.use(helmet.referrerPolicy({
   policy: ["same-origin"],
 }))
 
-
-// ***************************************************** //
 // to connect mongoose
 const mongoose = require('mongoose')
 mongoose.connect(process.env['DB'])
@@ -48,9 +44,6 @@ mongoose.connect(process.env['DB'])
   .catch((err) => {
     console.log('error', err)
   })
-
-
-// ***************************************************** //
 
 //Sample front-end
 app.route('/b/:board/')
